@@ -5,124 +5,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DomaStránka</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #262626;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
-            padding-top: 15px;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 204, 0, 0.5),
+                             0 0 40px rgba(255, 204, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 204, 0, 0.8),
+                             0 0 60px rgba(255, 204, 0, 0.5);
+            }
+        }
+
         h1 {
             text-align: center;
-            color: #ffffff;
+            color: #ffcc00;
             margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            animation: fadeInDown 0.8s ease, glow 3s ease-in-out infinite;
+            text-transform: uppercase;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            background: #1e1e1e;
+
+        .quote-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border-left: 4px solid #ffcc00;
+            animation: fadeInUp 0.8s ease 0.1s both;
         }
-        .columns {
-            display: flex;
-            gap: 20px;
-        }
-        .column {
-            padding: 10px;
-            text-align: center;
-        }
-        .school-container {
-            text-align: center;
-        }
-        .school-columns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .school-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        h2 {
-            text-align: center;
-            color: #ffffff;
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #e0e0e0;
             margin-bottom: 10px;
         }
+
+        .quote-author {
+            color: #ffcc00;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-card {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 204, 0, 0.2),
+                        0 0 0 1px rgba(255, 204, 0, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffcc00, transparent);
+            border-radius: 2px;
+        }
+
         ul {
             list-style: none;
             padding: 0;
         }
+
         li {
-            margin: 8px 0;
-            text-align: center;
+            margin: 10px 0;
+            animation: fadeInUp 0.5s ease both;
         }
+
         .highlight-link {
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             color: #121212;
-            background: #ffcc00;
-            padding: 10px;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%);
+            padding: 10px 16px;
+            border-radius: 10px;
             display: inline-block;
             text-align: center;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
+
+        .highlight-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .highlight-link:hover::before {
+            left: 100%;
+        }
+
+        .highlight-link:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(255, 204, 0, 0.5);
+            background: linear-gradient(135deg, #ffdd00 0%, #ffbb00 100%);
+        }
+
         a {
             text-decoration: none;
             color: #fff700bd;
-            font-size: 22px;
-            transition: 0.3s;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 6px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            position: relative;
         }
-        a:hover {
-            color: #aa0101;
+
+        a:not(.highlight-link):hover {
+            color: #ffcc00;
+            background: rgba(255, 204, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote {
+                font-size: 1em;
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
 <body>
     <h1>VITEJTE ZPATKY PANE</h1>
-    <div class="school-container">
-        <h2>School</h2>
-        <div class="school-columns">
-            <div class="school-column">
+    
+    <div class="quote-container">
+        <div class="quote" id="quote-text"></div>
+        <div class="quote-author" id="quote-author"></div>
+    </div>
+
+    <div class="container">
+        <div class="main-grid">
+            <div class="section-card">
+                <h2>Quick Access</h2>
                 <ul>
-                <li><a href="https://is.cuni.cz/studium/index.php?id=958f6b1043f12b0de0f643f6b438f134&tid=" target="_blank" class="highlight-link">SIS</a></li>
-                <li><a href="https://owl.mff.cuni.cz/acct/login/?next=/" target="_blank" class="highlight-link">OWL</a></li>
-                <li><a href="https://recodex.mff.cuni.cz/app" target="_blank" class="highlight-link">RECODEX</a></li>
-
-                <li><a href="https://discord.gg/k7sz7Mad" target="_blank">Audio processing Discord</a></li>
-                <li><a href="https://www.ms.mff.cuni.cz/~kopecky/vyuka/ndbi025/" target="_blank">Databázové Systémy</a></li>
-                <li><a href="https://mj.ucw.cz/vyuka/ads2/" target="_blank">ADS2</a></li>
-                
-                
-
-                
-            </ul>
+                    <li><a href="https://is.cuni.cz/studium/index.php?id=958f6b1043f12b0de0f643f6b438f134&tid=" target="_blank" class="highlight-link">SIS</a></li>
+                    <li><a href="https://owl.mff.cuni.cz/acct/login/?next=/" target="_blank" class="highlight-link">OWL</a></li>
+                    <li><a href="https://recodex.mff.cuni.cz/app" target="_blank" class="highlight-link">RECODEX</a></li>
+                    <li><a href="https://ulita.ms.mff.cuni.cz/mattermost/ar2526/channels/town-square" target="_blank">Mattermost</a></li>
+                </ul>
             </div>
-            <div class="school-column">
+
+            <div class="section-card">
+                <h2>Courses - Part 1</h2>
                 <ul>
+                    <li><a href="https://www.ms.mff.cuni.cz/~kopecky/vyuka/ndbi025/" target="_blank">Databázové Systémy</a></li>
+                    <li><a href="https://mj.ucw.cz/vyuka/ads2/" target="_blank">ADS2</a></li>
                     <li><a href="https://jbulin.github.io/teaching/fall/nail062/" target="_blank">VaP Logika</a></li>
+                    <li><a href="https://discord.gg/k7sz7Mad" target="_blank">Audio processing Discord</a></li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <h2>Courses - Part 2</h2>
+                <ul>
                     <li><a href="https://teaching.mff.cuni.cz/nprg041-web/" target="_blank">C++ přednáška</a></li>
                     <li><a href="https://zoi.utia.cas.cz/index.php/teaching/lecture-courses/npgr002" target="_blank">Image processing</a></li>
                     <li><a href="https://kam.mff.cuni.cz/~pultr/" target="_blank">Analyza2 priserna skripta</a></li>
                     <li><a href="https://ufal.mff.cuni.cz/courses/nmai054" target="_blank">Analyza2 cvika</a></li>
-                    <li><a href="https://ulita.ms.mff.cuni.cz/mattermost/ar2526/channels/town-square" target="_blank">Mattermost</a></li>
-                    
-
                 </ul>
             </div>
-        </div>
-    </div>
-        <div class="columns">
-            <div class="column">
+
+            <div class="section-card">
                 <h2>Personal</h2>
                 <ul>
                     <li><a href="https://www.gmail.com" target="_blank">Gmail</a></li>
@@ -130,14 +297,45 @@
                     <li><a href="https://outlook.office.com/mail/" target="_blank">OutLook</a></li>
                 </ul>
             </div>
-            <div class="column">
+
+            <div class="section-card">
                 <h2>Social</h2>
                 <ul>
                     <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
-                     <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
                     <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
                 </ul>
             </div>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Code is like humor. When you have to explain it, it's bad.", author: "Cory House" },
+            { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
+            { text: "Experience is the name everyone gives to their mistakes.", author: "Oscar Wilde" },
+            { text: "In order to be irreplaceable, one must always be different.", author: "Coco Chanel" },
+            { text: "Java is to JavaScript what car is to Carpet.", author: "Chris Heilmann" },
+            { text: "Knowledge is power.", author: "Francis Bacon" },
+            { text: "Sometimes it pays to stay in bed on Monday, rather than spending the rest of the week debugging Monday's code.", author: "Dan Salomon" },
+            { text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", author: "Antoine de Saint-Exupery" },
+            { text: "The best error message is the one that never shows up.", author: "Thomas Fuchs" },
+            { text: "Simplicity is the soul of efficiency.", author: "Austin Freeman" },
+            { text: "Before software can be reusable it first has to be usable.", author: "Ralph Johnson" },
+            { text: "Make it work, make it right, make it fast.", author: "Kent Beck" },
+            { text: "Walking on water and developing software from a specification are easy if both are frozen.", author: "Edward V. Berard" },
+            { text: "The function of good software is to make the complex appear to be simple.", author: "Grady Booch" }
+        ];
+
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            document.getElementById('quote-text').textContent = `"${quote.text}"`;
+            document.getElementById('quote-author').textContent = `— ${quote.author}`;
+        }
+
+        displayRandomQuote();
+    </script>
 </body>
 </html>
-
